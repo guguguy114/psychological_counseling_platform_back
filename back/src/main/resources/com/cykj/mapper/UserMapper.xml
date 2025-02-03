@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.UserMapper">
+
+    <update id="updateUserById">
+        update user
+        <set>
+            <if test="userIsDelete != null">
+                user_is_delete = #{userIsDelete},
+            </if>
+            <if test="userStatus != null">
+                user_status = #{userStatus},
+            </if>
+            <if test="userPassword != null">
+                user_password = #{userPassword},
+            </if>
+        </set>
+        where user_id = #{userId}
+
+    </update>
+
+    <!-- 后面增加了一个查询删除用户的功能 -->
+    <select id="queryUserByNameAndStatus" resultType="com.cykj.DO.User">
+        select *
+        from user
+        <where>
+            <if test="userName != null and userName != ''">
+                and user_name like concat("%", #{userName},"%")
+            </if>
+            <if test="userStatus != null and userStatus != ''">
+                and user_status = #{userStatus}
+            </if>
+            <if test="userIsDelete != null and userIsDelete != ''">
+                and user_is_delete = #{userIsDelete}
+            </if>
+        </where>
+    </select>
+</mapper>

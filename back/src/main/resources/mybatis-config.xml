@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+  <settings>
+    <!--开启sql日志-->
+    <setting name="logImpl" value="STDOUT_LOGGING"/>
+    <!--开启驼峰映射（指数据库内的下划线可以自动映射到java类的驼峰命名字段）-->
+    <setting name="mapUnderscoreToCamelCase" value="true"/>
+  </settings>
+
+  <!-- 插件的配置 -->
+  <plugins>
+    <!-- 拦截器 -->
+    <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+  </plugins>
+
+
+
+
+
+  <!--以下是传统注册mapper方式-->
+
+  <!--&lt;!&ndash;加载数据库配置文件&ndash;&gt;-->
+  <!--<properties resource="db.properties"/>-->
+
+
+  <!--&lt;!&ndash;配置环境变量&ndash;&gt;-->
+  <!--<environments default="def-env">-->
+
+
+  <!--  <environment id="def-env">-->
+  <!--    &lt;!&ndash;配置数据管理器&ndash;&gt;-->
+  <!--    <transactionManager type="jdbc"/>-->
+  <!--    &lt;!&ndash;数据源：可以用mybatis自带的POOLED或者德鲁伊、C3P0&ndash;&gt;-->
+  <!--    <dataSource type="POOLED">-->
+  <!--      <property name="driver" value="${jdbc.driver}"/>-->
+  <!--      <property name="url" value="${jdbc.url}"/>-->
+  <!--      <property name="username" value="${jdbc.account}"/>-->
+  <!--      <property name="password" value="${jdbc.password}"/>-->
+  <!--    </dataSource>-->
+  <!--  </environment>-->
+
+
+  <!--</environments>-->
+
+
+
+  <!--&lt;!&ndash;扫描mapper包&ndash;&gt;-->
+  <!--&lt;!&ndash;这里需要映射Mapper类否则会报错未注册mapper&ndash;&gt;-->
+  <!--&lt;!&ndash;可以通过两种方法查找&ndash;&gt;-->
+  <!--<mappers>-->
+  <!--  &lt;!&ndash;第一种通过类&ndash;&gt;-->
+  <!--  &lt;!&ndash;-->
+  <!--  <com.cykj.mapper class="com.cykj.com.cykj.mapper.AdminMapperr"/>-->
+  <!--  &ndash;&gt;-->
+  <!--  &lt;!&ndash;  第二种通过配置文件&ndash;&gt;-->
+  <!--  <com.cykj.mapper resource="com/cykj/com.cykj.mapper/AdminMapper.xml"/>-->
+
+  <!--</mappers>-->
+
+</configuration>

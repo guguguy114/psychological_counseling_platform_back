@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.QuestionMapper">
+
+    <resultMap id="questionMap" type="Question">
+        <result column="question_id" property="questionId"/>
+        <result column="field_id" property="fieldId"/>
+        <result column="question_title" property="questionTitle"/>
+        <collection property="questionItems" javaType="com.cykj.DO.QuestionItem">
+            <result column="question_item_id" property="questionItemId"/>
+            <result column="question_item_name" property="questionItemName"/>
+            <result column="question_item_order" property="questionItemOrder"/>
+            <result column="question_item_score" property="questionItemScore"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="queryQuestionByFieldId" resultMap="questionMap">
+        SELECT
+            *
+        FROM
+            question
+                LEFT JOIN question_item ON question.question_id = question_item.question_id
+        WHERE
+            field_id = #{fieldId}
+          AND question_is_delete = 0
+    </select>
+
+
+
+</mapper>

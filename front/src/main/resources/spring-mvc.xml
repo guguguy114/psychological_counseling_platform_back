@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+
+    <!--spring-mvc只能扫描这个controller的包，其他包不要去扫描-->
+    <context:component-scan base-package="com.cykj.controller"/>
+
+    <!--开启注解驱动-->
+    <!--这里的开头一定是要mvc的不然后端会报错-->
+    <mvc:annotation-driven>
+        <!--这里需要配置消息解析器,否则可能无法接收前端传来的json格式的请求-->
+        <mvc:message-converters>
+            <ref bean="fastJsonHttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+
+
+    <!--引入fastJson内中的消息解析器-->
+    <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+        <!--配置参数-->
+        <property name="supportedMediaTypes">
+            <list>
+                <!--设置中文编码-->
+                <value>text/html;charset:utf-8</value>
+                <!--配置对应的格式-->
+                <value>application/json</value>
+            </list>
+        </property>
+    </bean>
+
+
+
+
+    <!--为了获取静态资源并且不去拦截，需要配置一个静态资源处理器-->
+    <!--默认servlet处理(静态资源)-->
+    <mvc:default-servlet-handler/>
+
+
+    <!--配置一个视图解析器，这样之后返回页面就不需要打路径前缀和后缀了-->
+    <!--这里是指Java后台去访问可以便捷，前端依旧是无法直接访问的-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--配置前缀-->
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <!--配置后缀-->
+        <property name="suffix" value=".html"/>
+    </bean>
+
+
+    <!--但是由于我们只在上面暴露了pages文件夹，其他静态资源就无法被获取像css、js等，会导致页面出现一系列的问题-->
+    <!--为了解决这个问题，我们需要配置一个静态资源映射-->
+    <!--下面代码的含义是把请求地址为/static/css/下的所有静态资源重定向到WEB-INF/static/css下的同名文件-->
+    <!--js也是同理,其他静态资源也一样-->
+    <mvc:resources mapping="/static/css/**" location="WEB-INF/static/css/"/>
+    <mvc:resources mapping="/static/js/**" location="WEB-INF/static/js/"/>
+    <mvc:resources mapping="/static/images/**" location="WEB-INF/static/images/"/>
+
+
+
+
+    <!--配置拦截器-->
+    <!--配置token时启用-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--拦截所有请求-->
+            <mvc:mapping path="/**"/>
+            <!--不拦截的路经-->
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/code/get_code"/>
+            <mvc:exclude-mapping path="/user/enroll"/>
+            <bean class="com.cykj.interceptor.TokenInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+</beans>

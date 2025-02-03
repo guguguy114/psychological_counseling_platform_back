@@ -1,0 +1,50 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+
+
+  <!--配置ioc容器配置文件路径，如果不手动配置它会去web-info里面去找就无法完成初始化-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+
+  <!--配置一个监听器加载spring-ioc容器-->
+  <!--设置spring ioc容器监听器-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+
+
+
+  <!--使用spring前端控制器拦截全部前端请求-->
+  <servlet>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!--在初始化映射时就直接加载mvc配置文件-->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-mvc.xml</param-value>
+    </init-param>
+
+    <!--配置加载顺序，1优先级最高-->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <!--仅使用一个斜杠拦截所有前端请求-->
+    <!--包括静态资源都会拦截，html就会无法加载-->
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+
+
+
+
+</web-app>

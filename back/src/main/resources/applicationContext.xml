@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--这里进行包扫描-->
+    <!--装载所有的类对象-->
+    <context:component-scan base-package="com.cykj">
+        <!--但是排除controller注解的类-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--加载配置文件-->
+    <context:property-placeholder location="classpath:db.properties"/>
+
+    <!--配置德鲁伊数据源-->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.account}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+
+    <!--配置工厂bean-->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sessionFactory">
+        <!--配置下面两个东西主要是替代之前工具类里的数据源和配置-->
+        <!--这里需要指定两个东西：数据源-->
+        <property name="dataSource" ref="druidDataSource"/>
+        <!--整合mybatis配置文件-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+
+        <!--配置映射文件-->
+        <!--如果没有配置这个那mapper.xml的包路径就要和上面类路径一样-->
+        <property name="mapperLocations" value="classpath:com/cykj/mapper/*.xml"/>
+
+    </bean>
+
+    <!--自动扫描mapper-->
+    <!--配置spring接管mapper接口-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="mapper">
+        <!--扫描路径-->
+        <property name="basePackage" value="com.cykj.mapper"/>
+
+        <!--配置使用的session-->
+        <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
+    </bean>
+
+
+
+
+
+
+
+    <!--  配置事务管理器  -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--对数据源进行事务管理-->
+        <property name="dataSource" ref="druidDataSource"/>
+    </bean>
+
+    <!--声明式事务注解驱动-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>

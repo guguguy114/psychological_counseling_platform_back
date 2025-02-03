@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.UserMapper">
+
+    <insert id="insertUser">
+        insert into user
+        (user_account, user_password, user_name, user_sex, user_age, user_phone, user_address)
+        values
+        (#{account}, #{password}, #{username}, #{sex}, #{age}, #{phone}, #{address})
+    </insert>
+
+    <update id="charge">
+        update user
+        set user_balance = user_balance + #{chargeMoney}
+        where user_id = #{userId}
+    </update>
+
+    <update id="updateBalance">
+        update user
+        <if test="fundFlowType == 1">
+            set user_balance = user_balance + #{fundFlow}
+        </if>
+        <if test="fundFlowType == 0">
+            set user_balance = user_balance - #{fundFlow}
+        </if>
+        where user_id = #{userId}
+    </update>
+
+    <select id="login" resultType="User">
+        select *
+        from user
+        where user_account = #{userAccount}
+          and user_password = #{userPassword}
+          and user_is_delete = 0
+    </select>
+
+    <select id="getUserBalance" resultType="java.math.BigDecimal">
+        select user_balance
+        from user
+        where user_id = #{userId}
+    </select>
+
+</mapper>

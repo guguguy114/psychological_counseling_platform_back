@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.FundFlowMapper">
+
+    <insert id="insertFundFlow">
+        INSERT INTO fund_flow
+            (user_id, consultant_id, fund_flow_type, fund_flow_event, fund_flow)
+        VALUES
+            (#{userId}, #{consultantId}, #{fundFlowType}, #{fundFlowEvent}, #{fundFlow})
+    </insert>
+
+    <select id="queryFundFlowByUserId" resultType="com.cykj.DO.FundFlow">
+        SELECT
+            fund_flow.*,
+            admin.admin_name,
+            `user`.user_name
+        FROM
+            fund_flow
+                LEFT JOIN consultant ON consultant.consultant_id = fund_flow.consultant_id
+                LEFT JOIN admin ON admin.admin_id = consultant.consultant_admin_id
+                LEFT JOIN `user` ON `user`.user_id = fund_flow.user_id
+        WHERE
+            fund_flow.user_id = #{userId}
+        ORDER BY
+            fund_flow_time DESC
+    </select>
+
+</mapper>

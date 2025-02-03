@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.QuestionItemMapper">
+
+    <insert id="insertQuestionItem">
+        insert into question_item (question_id, question_item_name, question_item_order, question_item_score)
+        values (#{questionId}, #{questionItemName}, #{questionItemOrder}, #{questionItemScore})
+    </insert>
+
+    <update id="updateQuestionItemById">
+        update question_item
+        <set>
+            <if test="questionItemName != null and questionItemName != ''">
+                question_item_name = #{questionItemName},
+            </if>
+            <if test="questionItemOrder != null and questionItemOrder != ''">
+                question_item_order = #{questionItemOrder},
+            </if>
+            <if test="questionItemIsDelete != null and questionItemIsDelete != ''">
+                question_item_is_delete = #{questionItemIsDelete},
+            </if>
+            <if test="questionItemScore != null and questionItemScore != ''">
+                question_item_score = #{questionItemScore},
+            </if>
+        </set>
+        where question_item_id = #{questionItemId}
+    </update>
+</mapper>

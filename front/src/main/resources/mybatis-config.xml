@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+
+
+  <settings>
+    <!--开启sql日志-->
+    <setting name="logImpl" value="STDOUT_LOGGING"/>
+    <!--开启驼峰映射（指数据库内的下划线可以自动映射到java类的驼峰命名字段）-->
+    <setting name="mapUnderscoreToCamelCase" value="true"/>
+  </settings>
+
+  <!-- 配置文件要按照顺序声明这边是起别名 不然mybatisX会报错-->
+  <typeAliases>
+    <typeAlias type="com.cykj.DO.User" alias="User"/>
+    <typeAlias type="com.cykj.DO.Menu" alias="Menu"/>
+    <typeAlias type="com.cykj.DO.Question" alias="Question"/>
+  </typeAliases>
+
+
+  <!-- 插件的配置 -->
+  <plugins>
+    <!-- 拦截器 -->
+    <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+  </plugins>
+
+
+
+</configuration>

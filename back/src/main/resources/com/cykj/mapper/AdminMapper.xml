@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.AdminMapper">
+
+    <!--进行单独处理某些返回类型-->
+    <!--让内部的java类映射到其他java类（表映射到表）-->
+    <!--所有参数都需要声明-->
+    <resultMap id="adminMap" type="com.cykj.DO.Admin">
+        <result column="admin_id" property="adminId"/>
+        <result column="admin_name" property="adminName"/>
+        <result column="admin_account" property="adminAccount"/>
+        <result column="admin_face" property="adminFace"/>
+        <result column="admin_status" property="adminStatus"/>
+        <result column="admin_is_delete" property="adminIsDelete"/>
+        <result column="admin_create_time" property="adminCreateTime"/>
+        <result column="admin_update_time" property="adminUpdateTime"/>
+        <association property="role" javaType="com.cykj.DO.Role">
+            <result property="roleId" column="role_id"/>
+            <result property="roleName" column="role_name"/>
+        </association>
+        <association property="consultant" javaType="com.cykj.DO.Consultant">
+            <result property="consultantId" column="consultant_id"/>
+            <result property="consultantFieldId" column="consultant_field_id"/>
+            <result property="consultantTitle" column="consultant_title"/>
+            <result property="consultantCollege" column="consultant_college"/>
+        </association>
+    </resultMap>
+
+
+    <insert id="insertAdmin" useGeneratedKeys="true" keyProperty="adminId" parameterType="com.cykj.VO.InsertAdminVO">
+        insert into admin (admin_account, admin_password, admin_name, admin_role_id)
+        values (#{adminAccount}, #{adminPassword}, #{adminName}, #{adminRoleId})
+    </insert>
+
+    <update id="updateAdminById" >
+        update admin
+        <set>
+            <if test="adminIsDelete != null">
+                admin_is_delete = #{adminIsDelete},
+            </if>
+            <if test="adminStatus != null">
+                admin_status = #{adminStatus},
+            </if>
+            <if test="adminPassword != null">
+                admin_password = #{adminPassword}
+            </if>
+        </set>
+        where admin_id = #{adminId}
+
+    </update>
+
+    <select id="login" resultMap="adminMap">
+        select *
+        from admin as a, role as r
+        where a.admin_role_id =r.role_id
+        and admin_account = #{adminAccount}
+        and admin_password = #{adminPassword}
+        and admin_is_delete = 0
+    </select>
+
+
+    <select id="queryAdmin" resultMap="adminMap">
+        SELECT *
+        FROM admin as a
+        LEFT JOIN consultant as c
+        ON a.admin_id = c.consultant_admin_id
+        LEFT JOIN role as r
+        ON a.admin_role_id = r.role_id
+        <where>
+            <if test="adminName != null and adminName != ''">
+                and admin_name like concat("%", #{adminName},"%")
+            </if>
+            <if test="adminStatus != null">
+                and admin_status = #{adminStatus}
+            </if>
+            <if test="consultantTitle != null and consultantTitle != ''">
+                and consultant_title like concat("%", #{consultantTitle} ,"%")
+            </if>
+            <if test="adminIsDelete != null and adminIsDelete != ''">
+                and admin_is_delete = #{adminIsDelete}
+            </if>
+        </where>
+
+    </select>
+
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.ParamItemMapper">
+
+    <resultMap id="paramAndItem" type="com.cykj.DO.ParamItem">
+        <result property="paramItemName" column="param_item_name"/>
+        <result property="paramItemValue" column="param_item_value"/>
+        <result property="paramItemId" column="param_item_id"/>
+        <result property="paramItemOrder" column="param_item_order"/>
+        <association property="param" javaType="com.cykj.DO.Param">
+            <result property="paramId" column="param_id"/>
+            <result property="paramName" column="param_name"/>
+        </association>
+    </resultMap>
+
+    <insert id="insertParamItem">
+        insert into param_item (param_id, param_item_name, param_item_value)
+        values (#{paramId}, #{paramItemName}, #{paramItemValue})
+    </insert>
+
+
+    <update id="updateParamItemById">
+        update param_item
+        <set>
+            <if test="paramItemIsDelete != null and paramItemIsDelete != ''">
+                param_item_is_delete = #{paramItemIsDelete},
+            </if>
+            <if test="paramItemName != null and paramItemName != ''">
+                param_item_name = #{paramItemName},
+            </if>
+            <if test="paramItemValue != ''">
+                param_item_value = #{paramItemValue},
+            </if>
+            <if test="paramId != null and paramId != ''">
+                param_id = #{paramId},
+            </if>
+        </set>
+        where param_item_id = #{paramItemId}
+    </update>
+
+    <select id="queryParamItem" resultMap="paramAndItem">
+        select *
+        from param_item as i
+        left join param as p
+        on i.param_id = p.param_id
+        <where>
+            <if test="paramItemName != null and paramItemName != ''">
+                and i.param_item_name like concat("%", #{paramItemName},"%")
+            </if>
+            <if test="paramId != null and paramId != ''">
+                and p.param_id = #{paramId}
+            </if>
+            and i.param_item_is_delete = 0
+        </where>
+    </select>
+</mapper>

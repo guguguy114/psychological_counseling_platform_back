@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.QuestionMapper">
+
+    <resultMap id="questionMap" type="com.cykj.DO.Question">
+        <result column="question_id" property="questionId"/>
+        <result column="field_id" property="fieldId"/>
+        <result column="question_title" property="questionTitle"/>
+        <collection property="questionItems" javaType="com.cykj.DO.QuestionItem">
+            <result column="question_item_id" property="questionItemId"/>
+            <result column="question_id" property="questionId"/>
+            <result column="question_item_name" property="questionItemName"/>
+            <result column="question_item_order" property="questionItemOrder"/>
+            <result column="question_item_score" property="questionItemScore"/>
+        </collection>
+    </resultMap>
+
+    <insert id="insertQuestion">
+        insert into question (question_title, field_id, question_order)
+        VALUES (#{questionTitle},#{fieldId}, #{questionOrder})
+    </insert>
+
+    <update id="updateQuestionById">
+        update question
+        <set>
+            <if test="questionTitle != null and questionTitle != ''">
+                question_title = #{questionTitle},
+            </if>
+            <if test="questionOrder != null and questionOrder != ''">
+                question_order = #{questionOrder},
+            </if>
+            <if test="questionIsDelete != null and questionIsDelete != ''">
+                question_is_delete = #{questionIsDelete},
+            </if>
+        </set>
+        where question_id = #{questionId}
+    </update>
+
+
+    <select id="queryQuestionByFieldId" resultType="com.cykj.DO.Question">
+        select *
+        from question
+        where field_id = #{fieldId}
+        and question_is_delete = 0
+    </select>
+
+    <select id="queryQuestionById" resultMap="questionMap">
+        select *
+        from question as q, question_item as i
+        where i.question_id = q.question_id
+          and q.question_id = #{questionId}
+          and i.question_item_is_delete = 0
+        order by question_item_order
+    </select>
+
+
+</mapper>

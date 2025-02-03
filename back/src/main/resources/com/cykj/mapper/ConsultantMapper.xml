@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.ConsultantMapper">
+
+    <insert id="insertConsultant">
+        insert into consultant (consultant_admin_id, consultant_field_id, consultant_title, consultant_college)
+        values (#{consultantAdminId}, #{consultantFieldId}, #{consultantTitle}, #{consultantCollege})
+    </insert>
+
+</mapper>
