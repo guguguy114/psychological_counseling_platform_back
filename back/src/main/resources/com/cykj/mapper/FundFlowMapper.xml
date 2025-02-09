@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.FundFlowMapper">
+    <select id="queryFundFlowByAdminId" resultType="com.cykj.DO.FundFlow">
+        SELECT
+            fund_flow.*,
+            user.user_name
+        FROM
+            fund_flow
+                LEFT JOIN consultant ON fund_flow.consultant_id = consultant.consultant_id
+                LEFT JOIN user ON fund_flow.user_id = user.user_id
+        WHERE
+            consultant_admin_id = #{adminId}
+    </select>
+</mapper>

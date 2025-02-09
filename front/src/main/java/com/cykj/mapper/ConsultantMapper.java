@@ -4,8 +4,6 @@ import com.cykj.DO.Consultant;
 import com.cykj.VO.QueryConsultantVO;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.math.BigDecimal;
-
 /**
  * Description: TODO
  *
@@ -16,9 +14,5 @@ import java.math.BigDecimal;
 @Mapper
 public interface ConsultantMapper {
 
-    Integer insertConsultant(Consultant consultant);
-
-    BigDecimal getBalance(QueryConsultantVO vo);
-
-    Consultant getConsultantByAdminId(QueryConsultantVO vo);
+    Consultant getConsultantById(QueryConsultantVO vo);
 }

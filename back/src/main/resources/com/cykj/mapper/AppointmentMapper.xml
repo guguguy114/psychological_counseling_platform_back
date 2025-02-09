@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.AppointmentMapper">
+
+    <update id="updateAppointmentById">
+        update appointment
+        <set>
+            <if test="appointmentStatus != null">
+                appointment_status = #{appointmentStatus},
+            </if>
+            <if test="appointmentReply != null">
+                appointment_reply = #{appointmentReply},
+            </if>
+            <if test="appointmentReplyTime != null">
+                appointment_reply_time = #{appointmentReplyTime},
+            </if>
+        </set>
+        where appointment_id = #{appointmentId}
+    </update>
+
+    <select id="queryAppointment" resultType="com.cykj.DO.Appointment">
+        select appointment.*, appointment_time.appointment_start_time,
+               appointment_time.appointment_end_time, user.user_name,
+               admin.admin_name,
+               field.field_name
+        from appointment
+        left join appointment_time on appointment.appointment_time_id = appointment_time.appointment_time_id
+        left join user on appointment.user_id = user.user_id
+        left join consultant on appointment.consultant_id = consultant.consultant_id
+        left join admin on consultant.consultant_admin_id = admin.admin_id
+        left join field on appointment.field_id = field.field_id
+        <where>
+            <if test="startTime != null and endTime != null">
+                and appointment_time.appointment_start_time between #{startTime} and #{endTime}
+            </if>
+            <if test="appointmentStatus != null">
+                and appointment_status = #{appointmentStatus}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user.user_name like concat('%', #{userName}, '%')
+            </if>
+            <if test="consultantName != null and consultantName != ''">
+                and admin.admin_name like concat('%', #{consultantName}, '%')
+            </if>
+            <if test="consultantId != null and consultantId != ''">
+                and appointment.consultant_id = #{consultantId}
+            </if>
+        </where>
+        order by appointment_time.appointment_start_time desc
+    </select>
+</mapper>

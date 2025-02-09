@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.ConsultantMapper">
+
+    <select id="getConsultantById" resultType="com.cykj.DO.Consultant">
+        select *
+        from consultant
+        left join field on consultant.consultant_field_id = field.field_id
+        where consultant_id = #{consultantId}
+    </select>
+
+</mapper>

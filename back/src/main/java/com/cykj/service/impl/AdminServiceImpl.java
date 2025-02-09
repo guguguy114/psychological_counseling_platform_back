@@ -1,9 +1,11 @@
 package com.cykj.service.impl;
 
 import com.cykj.DO.Admin;
+import com.cykj.DO.Consultant;
 import com.cykj.DTO.ResponseDTO;
 import com.cykj.VO.InsertAdminVO;
 import com.cykj.VO.QueryAdminVO;
+import com.cykj.VO.QueryConsultantVO;
 import com.cykj.VO.UpdateAdminVO;
 import com.cykj.mapper.AdminMapper;
 import com.cykj.mapper.ConsultantMapper;
@@ -45,6 +47,12 @@ public class AdminServiceImpl implements AdminService {
             Admin admin = mapper.login(vo);
             if (admin != null) {
                 HashMap<String, Object> map = new HashMap<>();
+                if (admin.getRole().getRoleId() == 2) {
+                    QueryConsultantVO cvo = new QueryConsultantVO();
+                    cvo.setAdminId(admin.getAdminId());
+                    Consultant consultant = consultantMapper.getConsultantByAdminId(cvo);
+                    map.put("consultantId", consultant.getConsultantId());
+                }
                 map.put("adminId", admin.getAdminId());
                 map.put("roleId", admin.getRole().getRoleId());
                 map.put("name", admin.getAdminName());

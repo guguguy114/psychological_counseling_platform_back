@@ -94,6 +94,7 @@
             <groupId>io.github.qyg2297248353.components</groupId>
             <artifactId>jsonwebtoken-jjwt</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.sh1r0ko</groupId>
             <artifactId>back</artifactId>

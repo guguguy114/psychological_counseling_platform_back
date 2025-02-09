@@ -9,7 +9,7 @@
         values (#{userId}, #{fieldId}, #{assessmentScore}, #{assessmentResult}, #{assessmentReport})
     </insert>
 
-    <select id="queryAssessmentRecordByUserId" resultType="com.cykj.DO.AssessmentRecord">
+    <select id="queryAssessmentRecordByUserId" resultType="AssessmentRecord">
         select * from assessment_record where user_id = #{userId}
         ORDER BY assessment_time DESC
     </select>

@@ -24,7 +24,6 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         // 获取请求头
         String token = request.getHeader("Token");
-        System.out.println(token);
 
         // token为空时拦截
         if (token == null || token.isEmpty()) {
@@ -39,7 +38,6 @@ public class TokenInterceptor implements HandlerInterceptor {
         try {
             System.out.println(JwtUtils.parseJWT(token));
         } catch (Exception e) {
-            System.out.println("过期");
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(JSON.toJSONString(new ResponseDTO(-7, "token过期", null)));
             return false;

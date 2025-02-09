@@ -10,4 +10,12 @@
         values (#{consultantAdminId}, #{consultantFieldId}, #{consultantTitle}, #{consultantCollege})
     </insert>
 
+    <select id="getBalance" resultType="java.math.BigDecimal">
+        select consultant.consultant_balance from consultant where consultant_admin_id = #{adminId}
+    </select>
+
+    <select id="getConsultantByAdminId" resultType="com.cykj.DO.Consultant">
+        select * from consultant where consultant_admin_id = #{adminId}
+    </select>
+
 </mapper>

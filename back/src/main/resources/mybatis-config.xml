@@ -10,6 +10,15 @@
     <setting name="mapUnderscoreToCamelCase" value="true"/>
   </settings>
 
+  <!-- 配置文件要按照顺序声明这边是起别名 不然mybatisX会报错-->
+  <typeAliases>
+    <typeAlias type="com.cykj.DO.User" alias="User"/>
+    <typeAlias type="com.cykj.DO.Menu" alias="Menu"/>
+    <typeAlias type="com.cykj.DO.Question" alias="Question"/>
+    <typeAlias type="com.cykj.DO.AssessmentRecord" alias="AssessmentRecord"/>
+  </typeAliases>
+
+
   <!-- 插件的配置 -->
   <plugins>
     <!-- 拦截器 -->
@@ -18,46 +27,5 @@
 
 
 
-
-
-  <!--以下是传统注册mapper方式-->
-
-  <!--&lt;!&ndash;加载数据库配置文件&ndash;&gt;-->
-  <!--<properties resource="db.properties"/>-->
-
-
-  <!--&lt;!&ndash;配置环境变量&ndash;&gt;-->
-  <!--<environments default="def-env">-->
-
-
-  <!--  <environment id="def-env">-->
-  <!--    &lt;!&ndash;配置数据管理器&ndash;&gt;-->
-  <!--    <transactionManager type="jdbc"/>-->
-  <!--    &lt;!&ndash;数据源：可以用mybatis自带的POOLED或者德鲁伊、C3P0&ndash;&gt;-->
-  <!--    <dataSource type="POOLED">-->
-  <!--      <property name="driver" value="${jdbc.driver}"/>-->
-  <!--      <property name="url" value="${jdbc.url}"/>-->
-  <!--      <property name="username" value="${jdbc.account}"/>-->
-  <!--      <property name="password" value="${jdbc.password}"/>-->
-  <!--    </dataSource>-->
-  <!--  </environment>-->
-
-
-  <!--</environments>-->
-
-
-
-  <!--&lt;!&ndash;扫描mapper包&ndash;&gt;-->
-  <!--&lt;!&ndash;这里需要映射Mapper类否则会报错未注册mapper&ndash;&gt;-->
-  <!--&lt;!&ndash;可以通过两种方法查找&ndash;&gt;-->
-  <!--<mappers>-->
-  <!--  &lt;!&ndash;第一种通过类&ndash;&gt;-->
-  <!--  &lt;!&ndash;-->
-  <!--  <com.cykj.mapper class="com.cykj.com.cykj.mapper.AdminMapperr"/>-->
-  <!--  &ndash;&gt;-->
-  <!--  &lt;!&ndash;  第二种通过配置文件&ndash;&gt;-->
-  <!--  <com.cykj.mapper resource="com/cykj/com.cykj.mapper/AdminMapper.xml"/>-->
-
-  <!--</mappers>-->
 
 </configuration>

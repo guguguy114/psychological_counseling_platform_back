@@ -18,6 +18,7 @@
     <typeAlias type="com.cykj.DO.User" alias="User"/>
     <typeAlias type="com.cykj.DO.Menu" alias="Menu"/>
     <typeAlias type="com.cykj.DO.Question" alias="Question"/>
+    <typeAlias type="com.cykj.DO.AssessmentRecord" alias="AssessmentRecord"/>
   </typeAliases>
 
 

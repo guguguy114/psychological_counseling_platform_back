@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.AppointmentTimeMapper">
+
+    <insert id="insertAppointmentTime">
+        insert into appointment_time (user_id, consultant_id, appointment_start_time, appointment_end_time)
+        values (#{userId}, #{consultantId}, #{appointmentStartTime}, #{appointmentEndTime})
+    </insert>
+
+
+    <select id="verifyTheOverlappingTimePeriods" resultType="com.cykj.DO.AppointmentTime">
+        SELECT * FROM appointment_time as a
+        WHERE (a.appointment_end_time &gt; #{appointmentStartTime} and a.appointment_end_time &lt; #{appointmentEndTime} )
+        or (a.appointment_start_time &gt; #{appointmentStartTime} and a.appointment_start_time &lt; #{appointmentEndTime})
+        or (a.appointment_start_time &lt; #{appointmentStartTime} and a.appointment_end_time &gt; #{appointmentEndTime})
+    </select>
+
+    <select id="queryAppointmentTimeByCourseId" resultType="com.cykj.DO.AppointmentTime">
+        SELECT a.*,u.user_name FROM appointment_time as a
+        left join user as u on a.user_id = u.user_id
+        WHERE a.consultant_id = #{consultantId}
+    </select>
+</mapper>

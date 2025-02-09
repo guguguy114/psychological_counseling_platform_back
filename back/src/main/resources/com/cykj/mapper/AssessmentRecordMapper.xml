@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.AssessmentRecordMapper">
+
+    <select id="queryAssessmentRecordByDatetimeAndScore" resultType="AssessmentRecord">
+        SELECT a.*, u.user_name, f.field_name
+        FROM assessment_record AS a
+        LEFT JOIN `user` AS u ON a.user_id = u.user_id
+        LEFT JOIN field AS f ON a.field_id = f.field_id
+        <where>
+            <if test="startTime != null and endTime != null">
+                and assessment_time between #{startTime} and #{endTime}
+            </if>
+            <if test="startScore != null and startScore != '' and endScore != null and endScore != ''">
+                and assessment_score between #{startScore} and #{endScore}
+            </if>
+        </where>
+    </select>
+
+</mapper>
