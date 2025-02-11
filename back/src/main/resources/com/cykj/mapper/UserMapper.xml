@@ -19,7 +19,17 @@
             </if>
         </set>
         where user_id = #{userId}
+    </update>
 
+    <update id="updateBalance">
+        update user
+        <if test="fundFlowType == 1">
+            set user_balance = user_balance + #{fundFlow}
+        </if>
+        <if test="fundFlowType == 0">
+            set user_balance = user_balance - #{fundFlow}
+        </if>
+        where user_id = #{userId}
     </update>
 
     <!-- 后面增加了一个查询删除用户的功能 -->
@@ -38,4 +48,19 @@
             </if>
         </where>
     </select>
+
+    <select id="getUserBalance" resultType="java.math.BigDecimal">
+        select user_balance
+        from user
+        where user_id = #{userId}
+    </select>
+
+    <select id="getUserCountByDateRange" resultType="java.lang.Integer">
+        select count(*)
+        from user
+        where user_enroll_time between #{startTime} and #{endTime}
+    </select>
+
+
+
 </mapper>

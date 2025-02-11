@@ -1,6 +1,7 @@
 package com.cykj.mapper;
 
 import com.cykj.DO.Appointment;
+import com.cykj.VO.InsertAppointmentVO;
 import com.cykj.VO.QueryAppointmentVO;
 import com.cykj.VO.UpdateAppointmentVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,4 +23,6 @@ public interface AppointmentMapper {
     Integer updateAppointmentById(UpdateAppointmentVO vo);
 
     List<Appointment> queryAppointmentByConsultantId(QueryAppointmentVO vo);
+
+    Integer insertAppointment(InsertAppointmentVO vo);
 }

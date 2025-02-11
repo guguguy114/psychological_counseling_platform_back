@@ -31,22 +31,6 @@ public class AppointmentTimeServiceImpl implements AppointmentTimeService {
     }
 
     @Override
-    public ResponseDTO insertAppointmentTime(InsertAppointmentTimeVO vo) {
-        List<AppointmentTime> appointmentTime = mapper.verifyTheOverlappingTimePeriods(vo);
-        if (!appointmentTime.isEmpty()) {
-            dto = new ResponseDTO(-11, "该时间段已设定预约时间，不可重复设定", null);
-        } else {
-            Integer result = mapper.insertAppointmentTime(vo);
-            if (result == 1) {
-                dto = ResponseDTO.success(result);
-            } else {
-                dto = ResponseDTO.error(null);
-            }
-        }
-        return dto;
-    }
-
-    @Override
     public ResponseDTO getAppointmentTimeByConsultantId(QueryAppointmentTimeVO vo) {
         List<AppointmentTime> list = mapper.queryAppointmentTimeByCourseId(vo);
         if (!list.isEmpty()) {

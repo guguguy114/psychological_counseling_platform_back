@@ -13,9 +13,9 @@
 
     <select id="verifyTheOverlappingTimePeriods" resultType="com.cykj.DO.AppointmentTime">
         SELECT * FROM appointment_time as a
-        WHERE (a.appointment_end_time &gt; #{appointmentStartTime} and a.appointment_end_time &lt; #{appointmentEndTime} )
-        or (a.appointment_start_time &gt; #{appointmentStartTime} and a.appointment_start_time &lt; #{appointmentEndTime})
-        or (a.appointment_start_time &lt; #{appointmentStartTime} and a.appointment_end_time &gt; #{appointmentEndTime})
+        WHERE (a.appointment_end_time &gt;= #{appointmentStartTime} and a.appointment_end_time &lt;= #{appointmentEndTime} )
+        or (a.appointment_start_time &gt;= #{appointmentStartTime} and a.appointment_start_time &lt;= #{appointmentEndTime})
+        or (a.appointment_start_time &lt;= #{appointmentStartTime} and a.appointment_end_time &gt;= #{appointmentEndTime})
     </select>
 
     <select id="queryAppointmentTimeByCourseId" resultType="com.cykj.DO.AppointmentTime">

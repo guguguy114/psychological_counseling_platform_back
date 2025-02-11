@@ -1,6 +1,7 @@
 package com.cykj.mapper;
 
 import com.cykj.DO.FundFlow;
+import com.cykj.VO.InsertFundFlowVO;
 import com.cykj.VO.QueryFundFlowVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,4 +17,6 @@ import java.util.List;
 @Mapper
 public interface FundFlowMapper {
     List<FundFlow> queryFundFlowByAdminId(QueryFundFlowVO vo);
+
+    Integer insertFundFlow(InsertFundFlowVO vo);
 }

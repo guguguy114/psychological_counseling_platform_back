@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace填写mapper类包名加类名（全路径）-->
+<mapper namespace="com.cykj.mapper.AppointmentTimeMapper">
+
+    <update id="updateAppointmentTimeById">
+        update appointment_time
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+        </set>
+        where appointment_time_id = #{appointmentTimeId}
+    </update>
+
+    <select id="queryAppointmentTimeByCourseId" resultType="com.cykj.DO.AppointmentTime">
+        SELECT a.*,u.user_name FROM appointment_time as a
+        left join user as u on a.user_id = u.user_id
+        <where>
+            <if test="startTime != null and endTime != null">
+                and a.appointment_start_time between #{startTime} and #{endTime}
+            </if>
+            and a.consultant_id = #{consultantId}
+        </where>
+    </select>
+</mapper>

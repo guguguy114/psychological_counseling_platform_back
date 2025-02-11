@@ -10,6 +10,17 @@
         values (#{consultantAdminId}, #{consultantFieldId}, #{consultantTitle}, #{consultantCollege})
     </insert>
 
+    <update id="updateBalance">
+        update consultant
+        <if test="fundFlowType == 0">
+            set consultant_balance = consultant_balance + #{fundFlow}
+        </if>
+        <if test="fundFlowType == 1">
+            set consultant_balance = consultant_balance - #{fundFlow}
+        </if>
+        where consultant_id = #{consultantId}
+    </update>
+
     <select id="getBalance" resultType="java.math.BigDecimal">
         select consultant.consultant_balance from consultant where consultant_admin_id = #{adminId}
     </select>

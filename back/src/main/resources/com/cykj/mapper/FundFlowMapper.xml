@@ -4,6 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--namespace填写mapper类包名加类名（全路径）-->
 <mapper namespace="com.cykj.mapper.FundFlowMapper">
+
+    <insert id="insertFundFlow">
+        INSERT INTO fund_flow
+            (user_id, consultant_id, fund_flow_type, fund_flow_event, fund_flow)
+        VALUES
+            (#{userId}, #{consultantId}, #{fundFlowType}, #{fundFlowEvent}, #{fundFlow})
+    </insert>
+
     <select id="queryFundFlowByAdminId" resultType="com.cykj.DO.FundFlow">
         SELECT
             fund_flow.*,
@@ -14,5 +22,6 @@
                 LEFT JOIN user ON fund_flow.user_id = user.user_id
         WHERE
             consultant_admin_id = #{adminId}
+        order by fund_flow.fund_flow_time desc
     </select>
 </mapper>

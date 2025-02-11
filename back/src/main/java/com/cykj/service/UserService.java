@@ -17,4 +17,5 @@ public interface UserService {
 
     ResponseDTO updateUserById(UpdateUserVO vo);
 
+    ResponseDTO getUserCountByDateRange(QueryUserVO vo);
 }

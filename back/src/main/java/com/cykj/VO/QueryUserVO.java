@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 /**
  * Description: TODO
  *
@@ -15,9 +17,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QueryUserVO {
+    private Long userId;
     private String userName;
     private String userStatus;
     private Integer userIsDelete;
     private Integer startPage;
     private Integer pageSize;
+    private LocalDateTime[] startTimes;
+    private LocalDateTime[] endTimes;
 }

@@ -1,6 +1,7 @@
 package com.cykj.controller;
 
 import com.cykj.DTO.ResponseDTO;
+import com.cykj.VO.InsertAppointmentVO;
 import com.cykj.VO.QueryAppointmentVO;
 import com.cykj.VO.UpdateAppointmentVO;
 import com.cykj.service.AppointmentService;
@@ -40,6 +41,11 @@ public class AppointmentController {
     @RequestMapping("/get_appointment_by_consultant_id")
     public ResponseDTO getAppointmentByConsultantId(@RequestBody QueryAppointmentVO vo)   {
         return appointmentService.getAppointmentByConsultantId(vo);
+    }
+
+    @RequestMapping("/insert_appointment")
+    public ResponseDTO insertAppointment(@RequestBody InsertAppointmentVO vo)   {
+        return appointmentService.insertAppointment(vo);
     }
 
 }

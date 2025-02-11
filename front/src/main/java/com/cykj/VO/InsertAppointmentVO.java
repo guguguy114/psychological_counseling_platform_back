@@ -5,26 +5,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * Description: TODO
  *
  * @author Guguguy
  * @version 1.0
- * @since 2025/2/6 下午11:24
+ * @since 2025/2/12 上午12:31
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateAppointmentVO {
-
-    private Long appointmentId;
-    private Long appointmentStatus;
-    private Long consultantId;
+public class InsertAppointmentVO {
     private Long userId;
+    private Long consultantId;
+    private Long fieldId;
+    private Long appointmentTimeId;
+    private String appointmentDetail;
+    private Long appointmentStatus;
     private BigDecimal appointmentPrice;
-    private String appointmentReply;
-    private LocalDateTime appointmentReplyTime;
-
 }

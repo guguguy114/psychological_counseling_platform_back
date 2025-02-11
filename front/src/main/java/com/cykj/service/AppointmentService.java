@@ -1,6 +1,7 @@
 package com.cykj.service;
 
 import com.cykj.DTO.ResponseDTO;
+import com.cykj.VO.InsertAppointmentVO;
 import com.cykj.VO.QueryAppointmentVO;
 import com.cykj.VO.UpdateAppointmentVO;
 
@@ -18,4 +19,6 @@ public interface AppointmentService {
     ResponseDTO updateAppointmentById(UpdateAppointmentVO vo);
 
     ResponseDTO getAppointmentByConsultantId(QueryAppointmentVO vo);
+
+    ResponseDTO insertAppointment(InsertAppointmentVO vo);
 }

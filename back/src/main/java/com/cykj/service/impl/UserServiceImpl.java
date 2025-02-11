@@ -14,7 +14,10 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description: TODO
@@ -63,5 +66,21 @@ public class UserServiceImpl implements UserService {
             dto = ResponseDTO.error("update failed");
         }
         return dto;
+    }
+
+    @Override
+    public ResponseDTO getUserCountByDateRange(QueryUserVO vo) {
+        Map<String, Object> map = new HashMap<>();
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < vo.getStartTimes().length; i++)  {
+            Integer result = mapper.getUserCountByDateRange(vo.getStartTimes()[i], vo.getEndTimes()[i]);
+            res.add(result);
+        }
+        // 查询区间时间段
+        map.put("list", res);
+        // 查询时间段总数
+        Integer total = mapper.getUserCountByDateRange(vo.getStartTimes()[0], vo.getEndTimes()[vo.getEndTimes().length - 1]);
+        map.put("total", total);
+        return ResponseDTO.success(map);
     }
 }

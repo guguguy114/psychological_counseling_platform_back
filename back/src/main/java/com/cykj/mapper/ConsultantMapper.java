@@ -1,6 +1,7 @@
 package com.cykj.mapper;
 
 import com.cykj.DO.Consultant;
+import com.cykj.VO.InsertFundFlowVO;
 import com.cykj.VO.QueryConsultantVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,4 +22,6 @@ public interface ConsultantMapper {
     BigDecimal getBalance(QueryConsultantVO vo);
 
     Consultant getConsultantByAdminId(QueryConsultantVO vo);
+
+    Integer updateBalance(InsertFundFlowVO vo);
 }

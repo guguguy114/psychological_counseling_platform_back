@@ -30,13 +30,18 @@ public class UserController {
 
     @RequestMapping("get_user_by_name_and_status")
     public ResponseDTO getUserByNameAndStatus(@RequestBody QueryUserVO vo) {
-        System.out.println(vo);
         return userService.getUserByNameAndStatus(vo);
     }
 
     @RequestMapping("update_user_by_id")
     public ResponseDTO updateUserById(@RequestBody UpdateUserVO vo) {
         return userService.updateUserById(vo);
+    }
+
+    @RequestMapping("get_user_count_by_date_range")
+    public ResponseDTO getUserCountByDateRange(@RequestBody QueryUserVO vo) {
+        System.out.println(vo);
+        return userService.getUserCountByDateRange(vo);
     }
 
 }
