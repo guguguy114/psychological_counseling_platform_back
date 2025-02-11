@@ -23,5 +23,6 @@ public class UpdateAppointmentVO {
     private String appointmentReply;
     private String appointmentComment;
     private LocalDateTime appointmentReplyTime;
+    private LocalDateTime appointmentCommentTime;
 
 }

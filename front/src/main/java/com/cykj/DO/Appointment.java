@@ -24,6 +24,7 @@ public class Appointment {
   private String appointmentReply;
   private LocalDateTime appointmentReplyTime;
   private String appointmentComment;
+  private LocalDateTime appointmentCommentTime;
 
   private LocalDateTime appointmentStartTime;
   private LocalDateTime appointmentEndTime;

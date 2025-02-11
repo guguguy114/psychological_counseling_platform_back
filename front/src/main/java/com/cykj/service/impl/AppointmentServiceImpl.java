@@ -55,4 +55,15 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return dto;
     }
+
+    @Override
+    public ResponseDTO getAppointmentByConsultantId(QueryAppointmentVO vo) {
+        List<Appointment> list = mapper.queryAppointmentByConsultantId(vo);
+        if (list == null) {
+            dto = ResponseDTO.error("获取咨询师预约信息失败");
+        } else {
+            dto = ResponseDTO.success(list);
+        }
+        return dto;
+    }
 }

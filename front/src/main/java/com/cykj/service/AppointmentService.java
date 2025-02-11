@@ -16,4 +16,6 @@ public interface AppointmentService {
     ResponseDTO getAppointment(QueryAppointmentVO vo);
 
     ResponseDTO updateAppointmentById(UpdateAppointmentVO vo);
+
+    ResponseDTO getAppointmentByConsultantId(QueryAppointmentVO vo);
 }

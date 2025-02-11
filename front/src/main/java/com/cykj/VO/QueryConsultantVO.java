@@ -16,4 +16,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QueryConsultantVO {
     private Long consultantId;
+    private Long fieldId;
 }

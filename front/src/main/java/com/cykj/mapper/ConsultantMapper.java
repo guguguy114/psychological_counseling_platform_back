@@ -4,6 +4,8 @@ import com.cykj.DO.Consultant;
 import com.cykj.VO.QueryConsultantVO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * Description: TODO
  *
@@ -15,4 +17,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ConsultantMapper {
 
     Consultant getConsultantById(QueryConsultantVO vo);
+
+    List<Consultant> getConsultantByFieldId(QueryConsultantVO vo);
 }

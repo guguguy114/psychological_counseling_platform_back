@@ -18,5 +18,6 @@ public class Consultant {
   private String consultantBrief;
 
   private String fieldName;
+  private String adminName;
 
 }

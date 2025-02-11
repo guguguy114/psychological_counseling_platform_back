@@ -9,7 +9,20 @@
         select *
         from consultant
         left join field on consultant.consultant_field_id = field.field_id
+        left join admin on consultant.consultant_admin_id = admin.admin_id
         where consultant_id = #{consultantId}
+    </select>
+
+    <select id="getConsultantByFieldId" resultType="com.cykj.DO.Consultant">
+        select *
+        from consultant
+        left join field on consultant.consultant_field_id = field.field_id
+        left join admin on consultant.consultant_admin_id = admin.admin_id
+        <where>
+            <if test="fieldId != null">
+                field_id = #{fieldId}
+            </if>
+        </where>
     </select>
 
 </mapper>

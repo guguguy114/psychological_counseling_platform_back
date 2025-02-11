@@ -36,4 +36,10 @@ public class AppointmentController {
     public ResponseDTO updateAppointmentById(@RequestBody UpdateAppointmentVO vo)   {
         return appointmentService.updateAppointmentById(vo);
     }
+
+    @RequestMapping("/get_appointment_by_consultant_id")
+    public ResponseDTO getAppointmentByConsultantId(@RequestBody QueryAppointmentVO vo)   {
+        return appointmentService.getAppointmentByConsultantId(vo);
+    }
+
 }

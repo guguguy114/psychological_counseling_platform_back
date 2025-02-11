@@ -20,4 +20,6 @@ public interface AppointmentMapper {
     List<Appointment> queryAppointmentByTimeRangeAndStatus(QueryAppointmentVO vo);
 
     Integer updateAppointmentById(UpdateAppointmentVO vo);
+
+    List<Appointment> queryAppointmentByConsultantId(QueryAppointmentVO vo);
 }

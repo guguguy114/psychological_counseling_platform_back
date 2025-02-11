@@ -22,6 +22,7 @@ public class QueryAppointmentVO {
     private LocalDateTime endTime;
     private Long appointmentStatus;
     private Long userId;
+    private Long consultantId;
     private Integer startPage;
     private Integer pageSize;
 

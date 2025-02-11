@@ -13,4 +13,6 @@ import com.cykj.VO.QueryConsultantVO;
 public interface ConsultantService {
 
     ResponseDTO getConsultantById(QueryConsultantVO vo);
+
+    ResponseDTO getConsultantByFieldId(QueryConsultantVO vo);
 }

@@ -29,4 +29,9 @@ public class ConsultantController {
         return consultantService.getConsultantById(vo);
     }
 
+    @RequestMapping("/get_consultant_by_field_id")
+    public ResponseDTO getConsultantByFieldId(@RequestBody QueryConsultantVO vo)  {
+        return consultantService.getConsultantByFieldId(vo);
+    }
+
 }

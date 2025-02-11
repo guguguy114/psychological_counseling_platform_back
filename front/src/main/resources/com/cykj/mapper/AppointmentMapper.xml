@@ -20,6 +20,9 @@
             <if test="appointmentComment != null and appointmentComment != ''">
                 appointment_comment = #{appointmentComment},
             </if>
+            <if test="appointmentCommentTime != null">
+                appointment_comment_time = #{appointmentCommentTime},
+            </if>
         </set>
         where appointment_id = #{appointmentId}
     </update>
@@ -38,5 +41,16 @@
             and appointment.user_id = #{userId}
         </where>
         order by appointment_time.appointment_start_time desc
+    </select>
+
+    <select id="queryAppointmentByConsultantId" resultType="com.cykj.DO.Appointment">
+        select *
+        from appointment
+        left join user on appointment.user_id = user.user_id
+        where consultant_id = #{consultantId}
+        and appointment_status = 4
+        order by appointment.appointment_comment_time desc
+        limit 2
+
     </select>
 </mapper>
