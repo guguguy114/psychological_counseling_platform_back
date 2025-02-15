@@ -15,4 +15,6 @@ public class Consultant {
   private Long consultantFieldId;
   private String consultantTitle;
   private String consultantCollege;
+
+  private String adminName;
 }

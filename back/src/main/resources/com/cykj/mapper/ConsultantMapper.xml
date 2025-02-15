@@ -29,4 +29,10 @@
         select * from consultant where consultant_admin_id = #{adminId}
     </select>
 
+    <select id="getAll" resultType="com.cykj.DO.Consultant">
+        select *
+        from consultant
+        left join admin on consultant.consultant_admin_id = admin.admin_id
+    </select>
+
 </mapper>

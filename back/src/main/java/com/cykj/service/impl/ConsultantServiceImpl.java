@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Description: TODO
@@ -44,6 +45,16 @@ public class ConsultantServiceImpl implements ConsultantService {
             return ResponseDTO.error("获取用户信息失败");
         } else {
             return ResponseDTO.success(consultant);
+        }
+    }
+
+    @Override
+    public ResponseDTO getAll() {
+        List<Consultant> consultants = mapper.getAll();
+        if (consultants == null) {
+            return ResponseDTO.error("获取用户信息失败");
+        } else {
+            return ResponseDTO.success(consultants);
         }
     }
 }

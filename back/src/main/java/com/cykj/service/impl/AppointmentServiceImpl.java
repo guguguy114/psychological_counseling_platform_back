@@ -20,7 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description: TODO
@@ -94,5 +97,22 @@ public class AppointmentServiceImpl implements AppointmentService {
             dto = ResponseDTO.error("update appointment failed");
         }
         return dto;
+    }
+
+    @Override
+    public ResponseDTO getAppointmentCountByDataRange(QueryAppointmentVO vo) {
+        Map<String, Object> map = new HashMap<>();
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < vo.getConsultantIds().length; i++)  {
+            Integer result = mapper.getAppointmentCountByDataRange(vo.getConsultantIds()[i], vo.getStartTime(), vo.getEndTime());
+            res.add(result);
+        }
+        // 查询区间时间段
+        map.put("list", res);
+        // 查询时间段总数
+        Integer total = mapper.getAppointmentCountByDataRange(null ,vo.getStartTime(), vo.getEndTime());
+        map.put("total", total);
+        System.out.println(map);
+        return ResponseDTO.success(map);
     }
 }

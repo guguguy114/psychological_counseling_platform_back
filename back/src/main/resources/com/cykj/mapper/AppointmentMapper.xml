@@ -51,4 +51,18 @@
         </where>
         order by appointment_time.appointment_start_time desc
     </select>
+
+    <select id="getAppointmentCountByDataRange" resultType="java.lang.Integer">
+        select count(appointment_id)
+        from appointment
+        left join appointment_time on appointment.appointment_time_id = appointment_time.appointment_time_id
+        <where>
+            <if test="startTime != null and endTime != null">
+                and appointment_time.appointment_start_time between #{startTime} and #{endTime}
+            </if>
+            <if test="consultantId != null">
+                and appointment.consultant_id = #{consultantId}
+            </if>
+        </where>
+    </select>
 </mapper>

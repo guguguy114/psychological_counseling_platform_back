@@ -4,7 +4,9 @@ import com.cykj.DO.Appointment;
 import com.cykj.VO.QueryAppointmentVO;
 import com.cykj.VO.UpdateAppointmentVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,4 +22,8 @@ public interface AppointmentMapper {
     List<Appointment> queryAppointment(QueryAppointmentVO vo);
 
     Integer updateAppointmentById(UpdateAppointmentVO vo);
+
+    Integer getAppointmentCountByDataRange(@Param("consultantId") Long consultantId,
+                                           @Param("startTime") LocalDateTime startTime,
+                                           @Param("endTime") LocalDateTime endTime);
 }

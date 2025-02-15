@@ -14,4 +14,6 @@ public interface ConsultantService {
     ResponseDTO getBalance(QueryConsultantVO vo);
 
     ResponseDTO getConsultantByAdminId(QueryConsultantVO vo);
+
+    ResponseDTO getAll();
 }

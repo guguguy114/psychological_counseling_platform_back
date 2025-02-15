@@ -36,4 +36,9 @@ public class AppointmentController {
     public ResponseDTO updateAppointmentById(@RequestBody UpdateAppointmentVO vo)   {
         return appointmentService.updateAppointmentById(vo);
     }
+
+    @RequestMapping("/get_appointment_count_by_data_range")
+    public ResponseDTO getAppointmentCountByDataRange(@RequestBody QueryAppointmentVO vo)   {
+        return appointmentService.getAppointmentCountByDataRange(vo);
+    }
 }

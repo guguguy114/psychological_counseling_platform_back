@@ -25,6 +25,7 @@ public class QueryAppointmentVO {
     private LocalDateTime endTime;
     private Long appointmentStatus;
     private Long consultantId;
+    private Long[] consultantIds;
     private String consultantName;
     private String userName;
     private Integer startPage;

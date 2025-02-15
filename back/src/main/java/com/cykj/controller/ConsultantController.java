@@ -34,4 +34,8 @@ public class ConsultantController {
         return consultantService.getConsultantByAdminId(vo);
     }
 
+    @RequestMapping("/get_all")
+    public ResponseDTO getAll()  {
+        return consultantService.getAll();
+    }
 }
