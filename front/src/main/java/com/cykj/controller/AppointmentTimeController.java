@@ -1,7 +1,6 @@
 package com.cykj.controller;
 
 import com.cykj.DTO.ResponseDTO;
-import com.cykj.VO.InsertAppointmentTimeVO;
 import com.cykj.VO.QueryAppointmentTimeVO;
 import com.cykj.service.AppointmentTimeService;
 import org.springframework.web.bind.annotation.RequestBody;

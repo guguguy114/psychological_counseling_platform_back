@@ -1,7 +1,6 @@
 package com.cykj.mapper;
 
 import com.cykj.DO.AppointmentTime;
-import com.cykj.VO.InsertAppointmentTimeVO;
 import com.cykj.VO.QueryAppointmentTimeVO;
 import com.cykj.VO.UpdateAppointmentTimeVO;
 import org.apache.ibatis.annotations.Mapper;

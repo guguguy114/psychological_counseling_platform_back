@@ -1,7 +1,6 @@
 package com.cykj.service;
 
 import com.cykj.DTO.ResponseDTO;
-import com.cykj.VO.InsertAppointmentTimeVO;
 import com.cykj.VO.QueryAppointmentTimeVO;
 
 /**

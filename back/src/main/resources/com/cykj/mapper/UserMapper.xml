@@ -40,8 +40,8 @@
             <if test="userName != null and userName != ''">
                 and user_name like concat("%", #{userName},"%")
             </if>
-            <if test="userStatus != null and userStatus != ''">
-                and user_status = #{userStatus}
+            <if test="userStatus != null">
+                and user_status = #{userStatus} and user_is_delete = 0
             </if>
             <if test="userIsDelete != null and userIsDelete != ''">
                 and user_is_delete = #{userIsDelete}

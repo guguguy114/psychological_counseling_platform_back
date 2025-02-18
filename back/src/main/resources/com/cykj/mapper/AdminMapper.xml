@@ -74,7 +74,7 @@
                 and admin_name like concat("%", #{adminName},"%")
             </if>
             <if test="adminStatus != null">
-                and admin_status = #{adminStatus}
+                and admin_status = #{adminStatus} and admin_is_delete != 1
             </if>
             <if test="consultantTitle != null and consultantTitle != ''">
                 and consultant_title like concat("%", #{consultantTitle} ,"%")

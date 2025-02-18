@@ -2,7 +2,6 @@ package com.cykj.service.impl;
 
 import com.cykj.DO.AppointmentTime;
 import com.cykj.DTO.ResponseDTO;
-import com.cykj.VO.InsertAppointmentTimeVO;
 import com.cykj.VO.QueryAppointmentTimeVO;
 import com.cykj.mapper.AppointmentTimeMapper;
 import com.cykj.service.AppointmentTimeService;

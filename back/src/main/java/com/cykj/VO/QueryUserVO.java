@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class QueryUserVO {
     private Long userId;
     private String userName;
-    private String userStatus;
+    private Long userStatus;
     private Integer userIsDelete;
     private Integer startPage;
     private Integer pageSize;
